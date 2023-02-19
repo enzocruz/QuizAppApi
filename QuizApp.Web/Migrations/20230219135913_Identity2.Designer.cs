@@ -2,17 +2,19 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repo.Models;
 
 #nullable disable
 
-namespace Repo.Migrations
+namespace QuizApp.Web.Migrations
 {
     [DbContext(typeof(QuizDB))]
-    partial class QuizDBModelSnapshot : ModelSnapshot
+    [Migration("20230219135913_Identity2")]
+    partial class Identity2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,7 +191,7 @@ namespace Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Repo.Models.UserIdentiy", b =>

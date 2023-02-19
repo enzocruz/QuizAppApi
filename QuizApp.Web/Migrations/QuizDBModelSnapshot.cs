@@ -7,7 +7,7 @@ using Repo.Models;
 
 #nullable disable
 
-namespace Repo.Migrations
+namespace QuizApp.Web.Migrations
 {
     [DbContext(typeof(QuizDB))]
     partial class QuizDBModelSnapshot : ModelSnapshot
@@ -189,7 +189,7 @@ namespace Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Repo.Models.UserIdentiy", b =>

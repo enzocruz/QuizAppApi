@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repo.Models;
 
@@ -10,9 +11,10 @@ using Repo.Models;
 namespace Repo.Migrations
 {
     [DbContext(typeof(QuizDB))]
-    partial class QuizDBModelSnapshot : ModelSnapshot
+    [Migration("20230219134153_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

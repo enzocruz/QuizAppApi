@@ -2,17 +2,19 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repo.Models;
 
 #nullable disable
 
-namespace Repo.Migrations
+namespace QuizApp.Web.Migrations
 {
     [DbContext(typeof(QuizDB))]
-    partial class QuizDBModelSnapshot : ModelSnapshot
+    [Migration("20230219135659_IdentityM")]
+    partial class IdentityM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

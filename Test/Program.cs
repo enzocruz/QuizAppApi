@@ -8,7 +8,7 @@ public class Program {
     static public void Main(String[] args)
     {
         
-        UnitOfWork<QuizDB> unitOfWork=new UnitOfWork<QuizDB>();
+       /* UnitOfWork<QuizDB> unitOfWork=new UnitOfWork<QuizDB>();
         Repository<Quiz> repository=new Repository<Quiz>(unitOfWork.Context);
         repository.Add(new Quiz(){
                 Title="Test",Description="None"
@@ -20,6 +20,6 @@ public class Program {
         Console.WriteLine("Output");
         foreach(var s in l ){
             Console.WriteLine(s.Title);
-        }
+        }*/
     }
 }

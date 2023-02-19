@@ -1,22 +1,20 @@
 using Repo.Interfaces;
 using System.Collections.Generic;
-using System;
-
-using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Linq;
 namespace Repo.Imp{
 
 public class Repository<T> : IRepository<T> where T : class
 {
 
-    protected readonly DbContext _context;
+   public DbContext _context;
     public Repository(DbContext context){
         _context=context;
     }
    
 
-    public void Add(T enity)
+    public void Add(ref T enity)
     {
        _context.Set<T>().Add(enity);
     }

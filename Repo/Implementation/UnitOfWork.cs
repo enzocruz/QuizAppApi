@@ -1,38 +1,38 @@
 using Repo.Interfaces;
 using Repo.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Repo.Imp;
-
-public class UnitOfWork<TContext>: IUnitOfWork<TContext> where TContext : DbContext ,new ()
+public class UnitOfWork: IUnitOfWork 
 {
-    private readonly TContext _context;
-    public TContext Context {get{return _context;}}
-
-    public UnitOfWork(){
-        _context=new TContext();
+   
+    public  QuizDB _context{get;set;}
+    private IDbContextTransaction _objTran;
+    public UnitOfWork(QuizDB _db){
+        _context=_db;
     }
 
     public void Commit()
     {
-        throw new NotImplementedException();
+       _objTran.Commit();
     }
 
     public void CreateTransaction()
     {
-        throw new NotImplementedException();
+        _objTran=_context.Database.BeginTransaction();
     }
 
     public void Rollback()
     {
-        throw new NotImplementedException();
+      _objTran.Rollback();
     }
 
     public void Save()
     {
         _context.SaveChanges();
     }
+
 }

@@ -12,7 +12,7 @@ interface IRepository<T> where T:class{
     IEnumerable<T> Find (Expression<Func<T, bool>> exp);
 
     //adding
-    void Add(T enity);
+    void Add(ref T enity);
     void AddRange(IEnumerable<T> entities);
 
     //Removal
