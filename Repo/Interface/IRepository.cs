@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 namespace Repo.Interfaces;
 
-interface IRepository<T> where T:class{
+public interface IRepository<T> where T:class{
 
     //retrival
     T Get(int id);
