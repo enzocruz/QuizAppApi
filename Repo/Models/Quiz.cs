@@ -14,6 +14,7 @@ namespace Repo.Models{
 
         
         public DateTime CreatedTime{get;set;}=DateTime.Now;
+        public User? Author { get;set;}
     }
 
 }
