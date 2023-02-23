@@ -3,35 +3,61 @@ using Repo.Models;
 using Microsoft.AspNetCore.Authorization;
 using Repo.Imp;
 using QuizApp.Web.Models;
+using Repo.Implementation;
 
 namespace QuizApp.Web.Controllers{
     [ApiController]
     [Route("api/[controller]")]
-    public class QuizController : ControllerBase
+    public class QuestionController : ControllerBase
     {
-
-        private readonly ILogger<WeatherForecastController> _logger;
         private readonly QuizDB _db;
-        public QuizController(ILogger<WeatherForecastController> logger,QuizDB db)
+        private readonly UnitOfWork unitOfWork;
+        private readonly QuestionRepository questionsRepo;
+        public QuestionController(QuizDB db)
         {
-            _logger = logger;
-            _db=db;
+            _db = db;
+            this.unitOfWork = new UnitOfWork(_db);
+            this.questionsRepo = new QuestionRepository(unitOfWork._context);
+            _db = db;
         }
 
         [HttpGet(Name = "Questions")]
         public IEnumerable<QuestionViewModel> Get()
-        {
-            Repository<Question> repo=new Repository<Question>(_db);
+        {           
             List<QuestionViewModel> questions;
-             questions = repo.All().Select(x => new QuestionViewModel
+             questions = questionsRepo.All().Select(x => new QuestionViewModel
             {
-                QuizId = x.Quiz.Id,
+                QuizId = x.QuizId,
                 QuestionDescription = x.QuestionDesc,
-                AuthorId = x.Quiz.User.Id,
-                QuestionType = x.QuestionType.Id
+                AuthorId = x.UserId,
+                QuestionType = x.QuestionTypeId,
+                IsActive = x.IsActive
+                
 
             }).ToList();
             return questions;
+        }
+        [HttpPost]
+        [Route("CreateQuestion")]
+        public async Task<IActionResult> CreateQuestion([FromBody] QuestionViewModel model)
+        {
+            var checkifExists = questionsRepo.isDuplicate(model.QuestionDescription);
+            if (checkifExists == true)
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Question exists!" });
+            unitOfWork.CreateTransaction();
+            var q = new Question
+            {
+                QuestionDesc = model.QuestionDescription,
+                QuestionTypeId = model.QuestionType,
+                QuizId = model.QuizId,
+                IsActive = model.IsActive,
+                UserId = model.AuthorId
+            };
+            questionsRepo.Add(ref q);
+            unitOfWork.Save();
+            unitOfWork.Commit();
+            return Ok(new Response { Status = "Success", Message = "Question created successfully!" });
+
         }
     }
 }

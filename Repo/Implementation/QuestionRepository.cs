@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using Repo.Interface;
 using Microsoft.EntityFrameworkCore;
 using Repo.Imp;
+using System.Data.Entity;
 
 namespace Repo.Implementation
 {
-    public class QuestionRepository : Repository<Quiz>, IQuestion
+    public class QuestionRepository : Repository<Question>, IQuestion
     {
         public new QuizDB _context;
         public QuestionRepository(QuizDB context)
@@ -21,19 +22,24 @@ namespace Repo.Implementation
             _context = context;
         }
 
-        public IEnumerable<Quiz> GetQuestionsByAuthor(int a_id)
+        public IEnumerable<Question> GetQuestionsByAuthor(int a_id)
         {
-            return _context.Quizzes.Where(x=> x.User!.Id!.Equals(a_id)).ToList();
+            return _context.Questions.Where(x => x.UserId.Equals(a_id)).ToList();
         }
 
-        public IEnumerable<Quiz> GetQuestionsByDateCreated(DateTime dateTime)
+        public IEnumerable<Question> GetQuestionsByDateCreated(DateTime dateTime)
         {
-            return _context.Quizzes.Where(x => x.CreatedTime.Equals(dateTime)).ToList();
+            return _context.Questions.Where(x => x.DateCreated.Equals(dateTime)).ToList();
         }
 
-        public IEnumerable<Quiz> GetQuestionsByIsActive(bool isActive)
+        public IEnumerable<Question> GetQuestionsByIsActive(bool isActive)
         {
-            return _context.Quizzes.Where(x => x.IsActive.Equals(isActive)).ToList();
+            return _context.Questions.Where(x => x.IsActive.Equals(isActive)).ToList();
+        }
+
+        public  bool isDuplicate(string desc)
+        {
+            return  _context.Questions.Where(x => x.QuestionDesc.ToLower().Equals(desc.ToLower())).Any();
         }
     }
 }

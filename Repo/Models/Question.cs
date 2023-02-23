@@ -10,8 +10,11 @@ namespace Repo.Models
     {
         public int Id { get; set; }
         public string QuestionDesc { get; set; }
-        public QuestionType QuestionType { get; set; }
-        public Quiz Quiz { get; set; }
+        public int QuestionTypeId { get; set; }
+        public int QuizId { get; set; }
+        public int UserId { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
     }
 }
