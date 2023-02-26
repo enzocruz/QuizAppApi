@@ -1,12 +1,16 @@
+﻿using Repo.Imp;
+using Repo.Interfaces;
+using Repo.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-namespace Repo.Interfaces;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-interface IQuiz<T> where T:class{
-
-    IEnumerable<T>GetTopScore();
-   
-
-
+namespace Repo.Interface
+{
+    public interface IQuiz : IRepository<Quiz>
+    {
+        IEnumerable<Quiz> GetQuizByAuthor(int a_id);
+    }
 }

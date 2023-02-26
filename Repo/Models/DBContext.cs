@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Repo.Models{
     public class QuizDB : IdentityDbContext<UserIdentiy>
     {
-        private string ConString="Server=127.0.0.1;Port=6033;Uid=root;Pwd=password;Database=QuizDB ";
+        private string ConString="Server=127.0.0.1;Port=3306;Uid=root;Pwd=;Database=QuizDB";
         
          public QuizDB (DbContextOptions<QuizDB> options)
             : base(options)
@@ -32,7 +32,11 @@ namespace Repo.Models{
         //entities
 
         public DbSet<Quiz> Quizzes{get;set;}
-        public DbSet<User> Users{get;set;}
+        public DbSet<User> Users { get; set; }
+        public DbSet<QuestionOption> QuestionOptions { get;set;}
+        public DbSet<UserQuestionAnswer> UserQuestionAnswers { get;set;}
+        public DbSet<Question> Questions { get;set;}
+        public DbSet<QuestionType> QuestionTypes { get;set;}
     
     } 
 }

@@ -8,7 +8,7 @@ namespace Repo.Imp{
 public class Repository<T> : IRepository<T> where T : class
 {
 
-   public DbContext _context;
+    public DbContext _context;
     public Repository(DbContext context){
         _context=context;
     }
@@ -46,7 +46,7 @@ public class Repository<T> : IRepository<T> where T : class
 
     public void Remove(T entity)
     {
-        _context.Set<T>().Add(entity);
+        _context.Set<T>().Remove(entity);
     }
 }
 }
