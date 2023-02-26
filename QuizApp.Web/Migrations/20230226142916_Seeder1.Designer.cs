@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repo.Models;
 
@@ -10,9 +11,10 @@ using Repo.Models;
 namespace QuizApp.Web.Migrations
 {
     [DbContext(typeof(QuizDB))]
-    partial class QuizDBModelSnapshot : ModelSnapshot
+    [Migration("20230226142916_Seeder1")]
+    partial class Seeder1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,29 +45,6 @@ namespace QuizApp.Web.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "e28554a1-cd3c-4871-8cfb-30dda1e7b844",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "25ab6d7e-585f-469e-902b-f60008bdfb03",
-                            ConcurrencyStamp = "90cd984e-86c0-41d9-a6e5-557ea3c63679",
-                            Name = "Student",
-                            NormalizedName = "STUDENT"
-                        },
-                        new
-                        {
-                            Id = "9911b550-e25d-4889-8d72-df82d884e7b7",
-                            ConcurrencyStamp = "715b898d-c444-450c-926c-81523a139aba",
-                            Name = "Teacher",
-                            NormalizedName = "TEACHER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -149,13 +128,6 @@ namespace QuizApp.Web.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
-                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -298,14 +270,6 @@ namespace QuizApp.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Admin",
-                            LastName = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Repo.Models.UserIdentiy", b =>
@@ -376,23 +340,6 @@ namespace QuizApp.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("Accounts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d3bfc80-e2f8-4792-b4cf-df7afd3f6726",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPvt1C0rzdi42p1spq52CwT1mGWpUETGOtcpTb+Lgu0tWMNddfaHhQRZSLQxSxTs9A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "56678a07-c694-4e42-8f29-21de19da0997",
-                            TwoFactorEnabled = false,
-                            UserId = 1,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Repo.Models.UserQuestionAnswer", b =>
