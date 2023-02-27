@@ -37,6 +37,13 @@ namespace Repo.Implementation
             return _context.Questions.Where(x => x.IsActive.Equals(isActive)).ToList();
         }
 
+        public bool isCorrectAnswer(int q_id, int a_id)
+        {
+            bool answer = false;
+            answer = _context.QuestionOptions.Where(x => x.Question.Id.Equals(q_id) && x.IsAnswer.Equals(1) && x.Id.Equals(a_id)).Any();
+            return answer;
+        }
+
         public  bool isDuplicate(string desc)
         {
             return  _context.Questions.Where(x => x.QuestionDesc.ToLower().Equals(desc.ToLower())).Any();

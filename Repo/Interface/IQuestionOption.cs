@@ -11,6 +11,5 @@ namespace Repo.Interface
     public interface IQuestionOption : IRepository<QuestionOption>
     {
         IEnumerable<QuestionOption> GetOptionsByQuestion(int q_id);
-        bool isAnswerCorrect(int q_id,int a_id);
     }
 }

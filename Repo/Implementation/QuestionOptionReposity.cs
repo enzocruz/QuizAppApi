@@ -26,11 +26,5 @@ namespace Repo.Implementation
             return _context.QuestionOptions.Where(x => x.Question.Id.Equals(q_id)).ToList();
         }
 
-        public bool isAnswerCorrect(int q_id, int a_id)
-        {
-            bool answer = false;
-            answer = _context.QuestionOptions.Where(x => x.Question.Id.Equals(q_id) && x.IsAnswer.Equals(1) && x.Id.Equals(a_id)).Any();
-            return answer;
-        }
     }
 }

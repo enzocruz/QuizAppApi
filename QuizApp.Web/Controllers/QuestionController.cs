@@ -59,5 +59,12 @@ namespace QuizApp.Web.Controllers{
             return Ok(new Response { Status = "Success", Message = "Question created successfully!" });
 
         }
+        [HttpPost]
+        [Route("CheckAnswer")]
+        public async Task<bool> CheckAnswer([FromBody] AnswerViewModel model)
+        {
+            bool isCorrect = questionsRepo.isCorrectAnswer(model.Q_id, model.Q_id);
+            return isCorrect;
+        }
     }
 }
