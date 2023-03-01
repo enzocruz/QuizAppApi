@@ -73,6 +73,7 @@ namespace Repo.Models{
         public DbSet<UserQuestionAnswer> UserQuestionAnswers { get;set;}
         public DbSet<Question> Questions { get;set;}
         public DbSet<QuestionType> QuestionTypes { get;set;}
+        public DbSet<UserScore> userScores { get;set;}
     
     } 
 }

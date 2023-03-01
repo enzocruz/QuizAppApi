@@ -20,7 +20,7 @@ namespace Repo.Implementation
 
         public IEnumerable<Quiz> GetQuizByAuthor(int a_id)
         {
-            throw new NotImplementedException();
+            return _context.Quizzes.Where(x => x.UserId.Equals(a_id)).ToList();
         }
     }
 }

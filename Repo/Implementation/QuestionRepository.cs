@@ -22,9 +22,9 @@ namespace Repo.Implementation
             _context = context;
         }
 
-        public IEnumerable<Question> GetQuestionsByAuthor(int a_id)
+        public IEnumerable<Question> GetQuestionsByAuthorQuiz(int q_id, int a_id)
         {
-            return _context.Questions.Where(x => x.UserId.Equals(a_id)).ToList();
+            return _context.Questions.Where(x => x.QuizId.Equals(q_id) && x.UserId.Equals(a_id)).ToList();
         }
 
         public IEnumerable<Question> GetQuestionsByDateCreated(DateTime dateTime)
@@ -35,6 +35,13 @@ namespace Repo.Implementation
         public IEnumerable<Question> GetQuestionsByIsActive(bool isActive)
         {
             return _context.Questions.Where(x => x.IsActive.Equals(isActive)).ToList();
+        }
+
+        public bool isCorrectAnswer(int q_id, int a_id)
+        {
+            bool answer = false;
+            answer = _context.QuestionOptions.Where(x => x.QuestionId.Equals(q_id) && x.IsAnswer.Equals(1) && x.Id.Equals(a_id)).Any();
+            return answer;
         }
 
         public  bool isDuplicate(string desc)

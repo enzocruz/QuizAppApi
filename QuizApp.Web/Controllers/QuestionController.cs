@@ -13,6 +13,8 @@ namespace QuizApp.Web.Controllers{
         private readonly QuizDB _db;
         private readonly UnitOfWork unitOfWork;
         private readonly QuestionRepository questionsRepo;
+        private readonly QuestionOptionReposity optionReposity;
+        
         public QuestionController(QuizDB db)
         {
             _db = db;
@@ -21,7 +23,7 @@ namespace QuizApp.Web.Controllers{
             _db = db;
         }
 
-        [HttpGet(Name = "Questions")]
+        [HttpGet("Questions")]
         public IEnumerable<QuestionViewModel> Get()
         {           
             List<QuestionViewModel> questions;
@@ -58,6 +60,38 @@ namespace QuizApp.Web.Controllers{
             unitOfWork.Commit();
             return Ok(new Response { Status = "Success", Message = "Question created successfully!" });
 
+        }
+        [HttpPost]
+        [Route("CheckAnswer")]
+        public async Task<bool> CheckAnswer([FromBody] AnswerViewModel model)
+        {
+            bool isCorrect = questionsRepo.isCorrectAnswer(model.Q_id, model.Q_id);
+            return isCorrect;
+        }
+        [HttpGet("GetQuestionByQuiz/{q_id}/{a_id}")]
+        public IEnumerable<QuestionViewModel> GetQuestionByQuiz(int q_id, int a_id)
+        {
+            List<QuestionViewModel> questions;
+            questions = questionsRepo.GetQuestionsByAuthorQuiz(q_id,a_id).Select(x => new QuestionViewModel
+            {
+                QuizId = x.QuizId,
+                QuestionDescription = x.QuestionDesc,
+                AuthorId = x.UserId,
+                QuestionType = x.QuestionTypeId,
+                IsActive = x.IsActive
+            }).ToList();
+            return questions;
+        }
+        [HttpGet("GetQuestionOptions/{qid}")]
+        public IEnumerable<QuesstionOptionsViewModel> GetOptionsByQuestion(int qid)
+        {
+            List<QuesstionOptionsViewModel> qoptions;
+            qoptions = optionReposity.GetOptionsByQuestion(qid).Select(x => new QuesstionOptionsViewModel
+            {
+                QuestionId = x.QuestionId,
+                QuestionsOptions = x.QuestionOpt
+            }).ToList();
+            return qoptions;
         }
     }
 }
