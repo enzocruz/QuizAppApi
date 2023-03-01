@@ -21,7 +21,7 @@ namespace QuizApp.Web.Controllers
             _db = db;
         }
 
-        [HttpGet(Name = "Quizzes")]
+        [HttpGet("Quizzes")]
         public IEnumerable<QuizViewModel> Get()
         {
             List<QuizViewModel> quiz;
@@ -33,7 +33,7 @@ namespace QuizApp.Web.Controllers
             }).ToList();
             return quiz;
         }
-        [HttpGet(Name = "QuizzesByAuthor/{id}")]
+        [HttpGet("QuizzesByAuthor/{a_id}")]
         public IEnumerable<QuizViewModel> GetQuizzesByAuthor(int a_id)
         {
             List<QuizViewModel> quiz;

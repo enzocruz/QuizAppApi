@@ -23,7 +23,7 @@ namespace QuizApp.Web.Controllers{
             _db = db;
         }
 
-        [HttpGet(Name = "Questions")]
+        [HttpGet("Questions")]
         public IEnumerable<QuestionViewModel> Get()
         {           
             List<QuestionViewModel> questions;
@@ -68,7 +68,7 @@ namespace QuizApp.Web.Controllers{
             bool isCorrect = questionsRepo.isCorrectAnswer(model.Q_id, model.Q_id);
             return isCorrect;
         }
-        [HttpGet(Name = "GetQuestionByQuiz/{id}")]
+        [HttpGet("GetQuestionByQuiz/{q_id}/{a_id}")]
         public IEnumerable<QuestionViewModel> GetQuestionByQuiz(int q_id, int a_id)
         {
             List<QuestionViewModel> questions;
@@ -82,7 +82,7 @@ namespace QuizApp.Web.Controllers{
             }).ToList();
             return questions;
         }
-        [HttpGet(Name = "GetQuestionOptions/{id}")]
+        [HttpGet("GetQuestionOptions/{qid}")]
         public IEnumerable<QuesstionOptionsViewModel> GetOptionsByQuestion(int qid)
         {
             List<QuesstionOptionsViewModel> qoptions;

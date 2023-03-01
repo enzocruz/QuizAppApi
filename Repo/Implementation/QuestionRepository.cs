@@ -22,7 +22,6 @@ namespace Repo.Implementation
             _context = context;
         }
 
-
         public IEnumerable<Question> GetQuestionsByAuthorQuiz(int q_id, int a_id)
         {
             return _context.Questions.Where(x => x.QuizId.Equals(q_id) && x.UserId.Equals(a_id)).ToList();
