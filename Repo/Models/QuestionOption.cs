@@ -10,7 +10,7 @@ namespace Repo.Models
     {
         public int Id { get; set; }
         public string? QuestionOpt { get; set; }
-        public Question Question { get; set; }
+        public int QuestionId { get; set; }
         public bool IsAnswer { get; set; }
         public string? TextAnswer { get; set; }
     }

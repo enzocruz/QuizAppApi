@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repo.Interface
 {
-    public interface IQuestionOption : IRepository<QuestionOption>
+    public interface IUserScores : IRepository<UserScore>
     {
-        IEnumerable<QuestionOption> GetOptionsByQuestion(int q_id);
     }
 }
